@@ -1,31 +1,15 @@
- 
-#
-# Seccion 1
-#
-# Esta seccion se puede modificar segun
-# los requerimientos de su proyecto
+SRCDIR=src
 
-CC=gcc
-SRC=hora.c
-OBJ=$(SRC:.c=.o)
-BIN=$(SRC:.c= )
-CFLAGS=-Wall -W -std=c99
-#
-# Seccion 2 (NO MODIFICAR!!!)
-#
-default: $(BIN)
+default: all
 
-$(BIN): $(OBJ)
-	$(CC) $^ -o $(BIN)
-	
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+all:
+	@cd $(SRCDIR) && $(MAKE)
 
 clean:
-	@rm -f $(OBJ)
-	@rm -f *~
-	@rm -f $(BIN)
+	@cd $(SRCDIR) && $(MAKE) clean
+	@rm -rf *~ core
 
-run:
-	@echo "Salida---------"
-	@./$(BIN)
+distclean: clean
+	@cd $(SRCDIR) && $(MAKE) distclean
+
+.PHONY: all clean distclean
